@@ -1,9 +1,13 @@
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import { sendEmail } from "@/helpers/mailer";
+import { connect } from "@/dbConfig/dbConfig";
 
 
 export async function POST(request: NextRequest){
+
+    await connect();
     try{
         const reqBody = await request.json();
         const {firstName, lastName, email, password} = reqBody;
@@ -37,11 +41,11 @@ export async function POST(request: NextRequest){
 
 
         // Send Verification Email
-
+        await sendEmail({email, emailType: 'VERIFY', userId: savedUser._id});
 
         return NextResponse.json({
             success: true,
-            message: "Signup Successful",
+            message: "Signup Successful, Please Verify your email",
         }, {status: 200});
 
     } catch(err: any){

@@ -2,6 +2,9 @@ import User from "@/models/userModel";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
+import { connect } from "@/dbConfig/dbConfig";
+
+connect();
 
 export async function POST(request: NextRequest){
     try{
@@ -21,6 +24,14 @@ export async function POST(request: NextRequest){
                 success: false,
                 message: "User not found !!",
             }, {status: 404});
+        }
+
+        // Checks if user is Verified, if not, will return response to verify email first
+        if(!user.isVerified){
+            return NextResponse.json({
+                success: false,
+                message: "Please Verify your Email First",
+            }, {status: 400});
         }
 
         const validPassword = await bcrypt.compare(password, user.password);
@@ -52,6 +63,7 @@ export async function POST(request: NextRequest){
         });
 
         return response;
+        
     } catch(err: any){
         console.log("Internal Server Error while Login");
         return NextResponse.json({
