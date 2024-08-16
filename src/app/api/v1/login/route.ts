@@ -27,12 +27,12 @@ export async function POST(request: NextRequest){
         }
 
         // Checks if user is Verified, if not, will return response to verify email first
-        if(!user.isVerified){
-            return NextResponse.json({
-                success: false,
-                message: "Please Verify your Email First",
-            }, {status: 400});
-        }
+        // if(!user.isVerified){
+        //     return NextResponse.json({
+        //         success: false,
+        //         message: "Please Verify your Email First",
+        //     }, {status: 400});
+        // }
 
         const validPassword = await bcrypt.compare(password, user.password);
         if(!validPassword){
@@ -65,10 +65,10 @@ export async function POST(request: NextRequest){
         return response;
         
     } catch(err: any){
-        console.log("Internal Server Error while Login");
+        console.log("Internal Server Error while Login: ", err);
         return NextResponse.json({
             success: false,
-            error: err.message,
+            message: "Internal Server Error while login !!",
         }, {status: 500});
     }
 }

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import User from "@/models/userModel";
+import { connect } from "@/dbConfig/dbConfig";
+
+connect();
 
 export async function POST(request: NextRequest){
     try{
@@ -16,14 +19,14 @@ export async function POST(request: NextRequest){
         return NextResponse.json({
             success: true,
             message: "User Details Fetched Successfully",
-            data: user,
+            user,
         }, {status: 200});
 
     } catch(err: any){
-        console.log("Internal Server Error while fetching user details");
+        console.log("Internal Server Error while fetching user details: ", err);
         return NextResponse.json({
             success: false,
-            error: err.message,
+            message: "Internal Server Error while fetching user details",
         }, {status: 500});
     }
 }

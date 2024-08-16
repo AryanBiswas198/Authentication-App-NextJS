@@ -6,7 +6,6 @@ import { connect } from "@/dbConfig/dbConfig";
 
 
 export async function POST(request: NextRequest){
-
     await connect();
     try{
         const reqBody = await request.json();
@@ -46,13 +45,14 @@ export async function POST(request: NextRequest){
         return NextResponse.json({
             success: true,
             message: "Signup Successful, Please Verify your email",
+            token: savedUser.verifyToken,
         }, {status: 200});
 
     } catch(err: any){
-        console.log("Internal Server Error in SignUp");
+        console.log("Internal Server Error in SignUp: ", err);
         return NextResponse.json({
             success: false,
-            error: err.message,
+            message: "Internal Server Error while Signing up !!",
         }, {status: 500});
     }
 }

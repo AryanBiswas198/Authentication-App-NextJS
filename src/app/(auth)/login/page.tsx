@@ -5,7 +5,7 @@ import { loginSchema } from "@/schemas/loginSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Loader2 } from "lucide-react";
+import { ApiResponse } from "@/types/ApiResponse";
 
 const LoginPage = () => {
 
@@ -38,19 +39,26 @@ const LoginPage = () => {
     const onSubmit = async(data: z.infer<typeof loginSchema>) => {
         setLoading(true);
         try{
-            const response = await axios.post('/api/v1/login', data);
+            const response = await axios.post<ApiResponse>('/api/v1/login', data);
             console.log("Login Response: ", response);
 
             toast({
                 title: "Login Successful",
             });
-            router.push("/api/v1/profile");
+
+            setTimeout(() => {
+                router.push(`/profile`);
+            }, 1000);   
+
         } catch(err){
-            console.error("Error in Login of User: ", err);
+            console.log("Error in Login of User: ", err);
+            const axiosError = err as AxiosError<ApiResponse>;
+
+            let errorMessage = axiosError.response?.data?.message;
             toast({
                 variant: "destructive",
                 title: "Uh oh! Something Went Wrong",
-                description: "Error in Login of User",
+                description: errorMessage,
             });
         } finally {
             setLoading(false);

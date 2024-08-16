@@ -15,9 +15,10 @@ import {
   import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
+import { ApiResponse } from "@/types/ApiResponse";
 
 
 
@@ -40,21 +41,27 @@ const SignupPage = () => {
     const onSubmit = async(data: z.infer<typeof signupSchema>) => {
         setLoading(true);
         try{
-            const response = await axios.post('/api/v1/signup', data);
+            const response = await axios.post<ApiResponse>('/api/v1/signup', data);
             console.log("Printing Signup Response: ", response);
 
             toast({
                 title: "Signup Successful !!",
-                description: "Please Verify Your Email now",
+                description: "Please Login into your account to Verify Email now !!",
             });
-            router.push("/api/v1/verifyemail");
+
+            setTimeout(() => {
+                router.replace(`/login`);
+            }, 2000);
 
         } catch(err){
-            console.error("Error in Signup of User: ", err);
+            console.log("Error in Signup of User: ", err);
+            const axiosError = err as AxiosError<ApiResponse>;
+
+            let errorMessage = axiosError.response?.data?.message;
             toast({
                 variant: "destructive",
                 title: "Uh oh! Something Went Wrong",
-                description: "Error in Signup of User",
+                description: errorMessage,
             });
         } finally{
             setLoading(false);

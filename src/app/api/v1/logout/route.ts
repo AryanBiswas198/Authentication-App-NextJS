@@ -17,10 +17,10 @@ export async function GET(request: NextRequest){
 
         return response;
     } catch(err: any){
-        console.log("Internal Server Error while Logging out !!");
+        console.log("Internal Server Error while Logging out !!", err);
         return NextResponse.json({
             success: false,
-            error: err.message,
+            message: "Internal Server Error while Logging out !!",
         }, {status: 500});
     }
 }
