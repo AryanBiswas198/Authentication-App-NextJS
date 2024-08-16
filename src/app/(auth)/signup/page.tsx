@@ -19,6 +19,7 @@ import axios, { AxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
 import { ApiResponse } from "@/types/ApiResponse";
+import RetroGrid from "@/components/magicui/retro-grid";
 
 
 
@@ -136,9 +137,11 @@ const SignupPage = () => {
             </form>
         </Form>
 
-        <p className="mt-4">OR</p>
-        <p className="text-lg tracking-wider text-blue-500 underline cursor-pointer font-semibold"
+        <p className="mt-6">OR</p>
+        <p className="text-lg tracking-wider mt-2 text-blue-500 underline cursor-pointer font-semibold"
             onClick={() => router.push('/login')} >Login Now</p>
+
+        <RetroGrid />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { ApiResponse } from "@/types/ApiResponse";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
+import RetroGrid from "@/components/magicui/retro-grid";
 
 const VerifyEmailPage = () => {
 
@@ -16,7 +17,7 @@ const VerifyEmailPage = () => {
     const verifiedUserEmail = async() => {
         setLoading(true);
         try{
-            const response = await axios.post<ApiResponse>(`/api/v1/verifyemail`, token);
+            const response = await axios.post<ApiResponse>(`/api/v1/verifyemail`, {token});
             console.log("User Verified Successfully");
 
             setIsVerified(true);
@@ -49,7 +50,7 @@ const VerifyEmailPage = () => {
     // For Fetching Token from URL
     useEffect(() => {
         const urlToken = window.location.search.split('=')[1];
-        console.log("Printing URL Token: ", urlToken);
+        // console.log("Printing URL Token: ", urlToken);
         setToken(urlToken);
     }, []);
 
@@ -61,21 +62,25 @@ const VerifyEmailPage = () => {
     }, [token]);
 
   return (
-    <div>
-        {
-            isVerified ? 
-            (
-                <div>
-                    You are Verified
+    <div className="h-full w-full flex flex-col mt-10 mb-7 items-center">
+        <RetroGrid />
+    {
+        isVerified ? 
+        (
+            <div className="font-bold flex flex-col justify-center items-center">
+                <p className="text-5xl tracking-wide">You Are Verified !!</p>
+                <div className="flex flex-col justify-center items-center mt-48">
+                    <p className="text-3xl text-gray-500 my-auto">Redirecting You to Profile Page</p>
                 </div>
-            ) : 
-            (
-                <div>
-                    You are Not Verified, Please Retry Again
-                </div>
-            )
-        }
-    </div>
+            </div>
+        ) : 
+        (
+            <div className="flex flex-col justify-center items-center h-full">
+                <p className="text-4xl font-bold">You are Not Verified, Please Retry Again</p>
+            </div>
+        )
+    }
+</div>
   )
 }
 

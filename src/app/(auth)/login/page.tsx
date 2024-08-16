@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Loader2 } from "lucide-react";
 import { ApiResponse } from "@/types/ApiResponse";
+import RetroGrid from "@/components/magicui/retro-grid";
 
 const LoginPage = () => {
 
@@ -105,6 +106,11 @@ const LoginPage = () => {
                 }
             </form>
         </Form>
+
+        <p className="mt-8">OR</p>
+        <p className="text-lg tracking-wider mt-2 text-blue-500 underline cursor-pointer font-semibold"
+            onClick={() => router.push('/signup')} >SignUp Now</p>
+        <RetroGrid />
     </div>
   )
 }
