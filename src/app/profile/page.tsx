@@ -93,25 +93,25 @@ const ProfilePage = () => {
             ) : 
             (
                 <div className="flex flex-col items-center">
-                    <SparklesText text={`Hello ${name}`} className="font-semibold mt-10" />
+                    <SparklesText text={`Hello ${name}`} className="font-semibold mt-10 text-3xl sm:text-4xl md:text-6xl" />
                     {
                         isVerified ? 
                         (
                             <div className="flex flex-col justify-center items-center">
-                                <SparklesText text="You Are Successfully Verified !" className="text-3xl mt-7" />
+                                <SparklesText text="You Are Successfully Verified !" className="text-2xl sm:text-3xl md:text-4xl mt-7" />
 
                                 <div className="flex flex-col mt-28 justify-center items-center gap-y-5">
-                                    <p className="text-gray-600 text-3xl font-semibold">Printing User Details Below !!</p>
-                                    <p className="text-gray-600 text-2xl font-semibold">Name: {name}</p>
-                                    <p className="text-gray-600 text-2xl font-semibold">Email: {email}</p>
+                                    <p className="text-gray-600 text-2xl md:text-3xl font-semibold">Printing User Details Below !!</p>
+                                    <p className="text-gray-600 text-2xl md:text-3xl font-semibold">Name: {name}</p>
+                                    <p className="text-gray-600 text-2xl md:text-3xl font-semibold">Email: {email}</p>
                                 </div>
                             </div>
                         ) : 
                         (
                             <div className="flex flex-col justify-center items-center">
                                 <div className="flex flex-col mt-48 justify-center items-center gap-y-5">
-                                    <p className="text-gray-600 text-2xl font-semibold">You are currently Not Verified</p>
-                                    <p className="text-3xl text-gray-500 font-semibold">Please Check Your Email and click on the Link to Verify Your Account !!</p>
+                                    <p className="text-gray-600 text-2xl md:text-3xl font-semibold">You are currently Not Verified</p>
+                                    <p className="text-2xl md:text-3xl text-gray-500 font-semibold">Please Check Your Email and click on the Link to Verify Your Account !!</p>
                                 </div>
                             </div>
                         )

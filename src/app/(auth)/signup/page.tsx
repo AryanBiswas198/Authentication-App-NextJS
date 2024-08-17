@@ -80,7 +80,7 @@ const SignupPage = () => {
             ) : 
             (
                 <div className="flex flex-col justify-center items-center">
-                    <h1 className="text-4xl font-bold my-10">Welcome, SignUp Below</h1>
+                    <h1 className="text-3xl md:text-4xl font-bold my-10">Welcome, SignUp Below</h1>
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-center items-center">
                                 <FormField
@@ -88,7 +88,7 @@ const SignupPage = () => {
                                 name="firstName"
                                 render={({ field }) => (
                                     <FormItem>
-                                    <FormLabel className="text-xl font-semibold tracking-wide">FirstName</FormLabel>
+                                    <FormLabel className="text-xl lg:text-2xl font-semibold tracking-wide">FirstName</FormLabel>
                                     <FormControl>
                                         <Input placeholder="Enter FirstName" {...field} />
                                     </FormControl>
@@ -102,7 +102,7 @@ const SignupPage = () => {
                                     name="lastName"
                                     render={({ field }) => (
                                         <FormItem>
-                                        <FormLabel className="text-xl font-semibold tracking-wide">LastName</FormLabel>
+                                        <FormLabel className="text-xl lg:text-2xl font-semibold tracking-wide">LastName</FormLabel>
                                         <FormControl>
                                             <Input placeholder="Enter LastName" {...field} />
                                         </FormControl>
@@ -116,7 +116,7 @@ const SignupPage = () => {
                                     name="email"
                                     render={({ field }) => (
                                         <FormItem>
-                                        <FormLabel className="text-xl font-semibold tracking-wide">Email</FormLabel>
+                                        <FormLabel className="text-xl lg:text-2xl font-semibold tracking-wide">Email</FormLabel>
                                         <FormControl>
                                             <Input placeholder="Enter Email" {...field} />
                                         </FormControl>
@@ -130,7 +130,7 @@ const SignupPage = () => {
                                     name="password"
                                     render={({ field }) => (
                                         <FormItem>
-                                        <FormLabel className="text-xl font-semibold tracking-wide">Password</FormLabel>
+                                        <FormLabel className="text-xl lg:text-2xl font-semibold tracking-wide">Password</FormLabel>
                                         <FormControl>
                                             <Input placeholder="Enter Password" {...field} />
                                         </FormControl>

@@ -12,8 +12,8 @@ const page = () => {
 
   return (
     <div className="relative flex h-[100vh] w-full flex-col items-center py-10 overflow-hidden rounded-lg border bg-background md:shadow-xl">
-      <SparklesText text="Authentication Page" className='text-black' />
-      <h2 className='text-2xl font-bold self-end mr-10'>By Aryan Biswas</h2>
+      <SparklesText text="Authentication Page" className='text-black text-3xl sm:text-4xl md:text-6xl' />
+      <h2 className='text-xl md:text-2xl font-bold self-center md:self-end mr-10'>By Aryan Biswas</h2>
       <div className='flex h-full justify-center items-center gap-x-14'>
         <CoolMode>
           <button onClick={() => router?.push('/login')} className='bg-black text-white px-7 py-1.5 rounded-full text-xl font-semibold '>
