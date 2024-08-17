@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 import RetroGrid from "@/components/magicui/retro-grid";
+import { Loader2 } from "lucide-react";
 
 const VerifyEmailPage = () => {
 
@@ -64,23 +65,35 @@ const VerifyEmailPage = () => {
   return (
     <div className="h-full w-full flex flex-col mt-10 mb-7 items-center">
         <RetroGrid />
-    {
-        isVerified ? 
-        (
-            <div className="font-bold flex flex-col justify-center items-center">
-                <p className="text-5xl tracking-wide">You Are Verified !!</p>
-                <div className="flex flex-col justify-center items-center mt-48">
-                    <p className="text-3xl text-gray-500 my-auto">Redirecting You to Profile Page</p>
+        {
+            loading ? 
+            (
+                <div className="flex flex-col justify-center items-center h-full">
+                    <Loader2 className="mr-2 h-72 w-72 animate-spin" />
                 </div>
-            </div>
-        ) : 
-        (
-            <div className="flex flex-col justify-center items-center h-full">
-                <p className="text-4xl font-bold">You are Not Verified, Please Retry Again</p>
-            </div>
-        )
-    }
-</div>
+            ) : 
+            (
+                <div className="">
+                    {
+                        isVerified ? 
+                        (
+                            <div className="font-bold flex flex-col justify-center items-center">
+                                <p className="text-5xl tracking-wide">You Are Verified !!</p>
+                                <div className="flex flex-col justify-center items-center mt-48">
+                                    <p className="text-3xl text-gray-500 my-auto">Redirecting You to Profile Page</p>
+                                </div>
+                            </div>
+                        ) : 
+                        (
+                            <div className="flex flex-col justify-center items-center h-full">
+                                <p className="text-4xl font-bold">You are Not Verified, Please Retry Again</p>
+                            </div>
+                        )
+                    }
+                </div>
+            )
+        }
+    </div>
   )
 }
 

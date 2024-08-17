@@ -4,9 +4,11 @@ import bcrypt from "bcrypt";
 import { sendEmail } from "@/helpers/mailer";
 import { connect } from "@/dbConfig/dbConfig";
 
+connect();
+
 
 export async function POST(request: NextRequest){
-    await connect();
+    // await connect();
     try{
         const reqBody = await request.json();
         const {firstName, lastName, email, password} = reqBody;

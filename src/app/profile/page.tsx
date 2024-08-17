@@ -8,6 +8,7 @@ import { userAgentFromString } from "next/server";
 import { useEffect, useState } from "react";
 import SparklesText from "@/components/magicui/sparkles-text";
 import RetroGrid from "@/components/magicui/retro-grid";
+import { Loader2 } from "lucide-react";
 
 
 
@@ -83,32 +84,44 @@ const ProfilePage = () => {
 
   return (
     <div className="h-full w-full flex flex-col mt-8 mb-7 items-center">
-        <SparklesText text={`Hello ${name}`} className="font-semibold mt-10" />
         {
-            isVerified ? 
+            loading ? 
             (
-                <div className="flex flex-col justify-center items-center">
-                    <SparklesText text="You Are Successfully Verified !" className="text-3xl mt-7" />
-
-                    <div className="flex flex-col mt-28 justify-center items-center gap-y-5">
-                        <p className="text-gray-600 text-3xl font-semibold">Printing User Details Below !!</p>
-                        <p className="text-gray-600 text-2xl font-semibold">Name: {name}</p>
-                        <p className="text-gray-600 text-2xl font-semibold">Email: {email}</p>
-                    </div>
+                <div className="flex flex-col justify-center items-center h-full">
+                    <Loader2 className="mr-2 h-72 w-72 animate-spin" />
                 </div>
             ) : 
             (
-                <div className="flex flex-col justify-center items-center">
-                    <div className="flex flex-col mt-48 justify-center items-center gap-y-5">
-                        <p className="text-gray-600 text-2xl font-semibold">You are currently Not Verified</p>
-                        <p className="text-3xl text-gray-500 font-semibold">Please Check Your Email and click on the Link to Verify Your Account !!</p>
-                    </div>
+                <div className="flex flex-col items-center">
+                    <SparklesText text={`Hello ${name}`} className="font-semibold mt-10" />
+                    {
+                        isVerified ? 
+                        (
+                            <div className="flex flex-col justify-center items-center">
+                                <SparklesText text="You Are Successfully Verified !" className="text-3xl mt-7" />
+
+                                <div className="flex flex-col mt-28 justify-center items-center gap-y-5">
+                                    <p className="text-gray-600 text-3xl font-semibold">Printing User Details Below !!</p>
+                                    <p className="text-gray-600 text-2xl font-semibold">Name: {name}</p>
+                                    <p className="text-gray-600 text-2xl font-semibold">Email: {email}</p>
+                                </div>
+                            </div>
+                        ) : 
+                        (
+                            <div className="flex flex-col justify-center items-center">
+                                <div className="flex flex-col mt-48 justify-center items-center gap-y-5">
+                                    <p className="text-gray-600 text-2xl font-semibold">You are currently Not Verified</p>
+                                    <p className="text-3xl text-gray-500 font-semibold">Please Check Your Email and click on the Link to Verify Your Account !!</p>
+                                </div>
+                            </div>
+                        )
+                    }
+                    <button onClick={() => logout()} className='bg-black text-white px-7 py-1.5 rounded-full text-xl font-semibold mt-20'>
+                        Logout
+                    </button>
                 </div>
             )
         }
-        <button onClick={() => logout()} className='bg-black text-white px-7 py-1.5 rounded-full text-xl font-semibold mt-20'>
-            Logout
-        </button>
         <RetroGrid />
     </div>
   )

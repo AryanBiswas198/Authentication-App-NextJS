@@ -71,76 +71,88 @@ const SignupPage = () => {
 
   return (
     <div className="h-full w-full flex flex-col mt-8 mb-7 justify-center items-center">
-        <h1 className="text-4xl font-bold my-10">Welcome, SignUp Below</h1>
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-center items-center">
-                <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                    <FormItem>
-                    <FormLabel className="text-xl font-semibold tracking-wide">FirstName</FormLabel>
-                    <FormControl>
-                        <Input placeholder="Enter FirstName" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                    </FormItem>
-                )}
-                />
+        {
+            loading ? 
+            (
+                <div className="flex flex-col justify-center items-center h-full">
+                    <Loader2 className="mr-2 h-72 w-72 animate-spin" />
+                </div>
+            ) : 
+            (
+                <div className="flex flex-col justify-center items-center">
+                    <h1 className="text-4xl font-bold my-10">Welcome, SignUp Below</h1>
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-center items-center">
+                                <FormField
+                                control={form.control}
+                                name="firstName"
+                                render={({ field }) => (
+                                    <FormItem>
+                                    <FormLabel className="text-xl font-semibold tracking-wide">FirstName</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Enter FirstName" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                    </FormItem>
+                                )}
+                                />
 
-                <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="text-xl font-semibold tracking-wide">LastName</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Enter LastName" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                                <FormField
+                                    control={form.control}
+                                    name="lastName"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                        <FormLabel className="text-xl font-semibold tracking-wide">LastName</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Enter LastName" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
 
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="text-xl font-semibold tracking-wide">Email</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Enter Email" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
+                                <FormField
+                                    control={form.control}
+                                    name="email"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                        <FormLabel className="text-xl font-semibold tracking-wide">Email</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Enter Email" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
 
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="text-xl font-semibold tracking-wide">Password</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Enter Password" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                {
-                    loading ? 
-                        (<Loader2 className="mr-2 h-4 w-4 animate-spin" />) : 
-                        (<Button className="w-full mx-auto" type="submit">Submit</Button>)
-                }
-            </form>
-        </Form>
+                                <FormField
+                                    control={form.control}
+                                    name="password"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                        <FormLabel className="text-xl font-semibold tracking-wide">Password</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Enter Password" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                {
+                                    loading ? 
+                                        (<Loader2 className="mr-2 h-4 w-4 animate-spin" />) : 
+                                        (<Button className="w-full mx-auto" type="submit">Submit</Button>)
+                                }
+                            </form>
+                        </Form>
 
-        <p className="mt-6">OR</p>
-        <p className="text-lg tracking-wider mt-2 text-blue-500 underline cursor-pointer font-semibold"
-            onClick={() => router.push('/login')} >Login Now</p>
+                        <p className="mt-6">OR</p>
+                        <p className="text-lg tracking-wider mt-2 text-blue-500 underline cursor-pointer font-semibold"
+                            onClick={() => router.push('/login')} >Login Now</p>
 
+                </div>
+            )
+        }
         <RetroGrid />
     </div>
   )
